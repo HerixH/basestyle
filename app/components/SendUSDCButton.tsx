@@ -49,12 +49,15 @@ export default function SendUSDCButton({
   };
 
   // Create USDC transfer transaction
-  const calls = [
+  const parsedAmount = parseFloat(amount);
+  const isValidAmount = !isNaN(parsedAmount) && parsedAmount > 0;
+  
+  const calls = isValidAmount ? [
     {
       to: USDC_ADDRESS as `0x${string}`,
-      data: `0xa9059cbb${recipientAddress.slice(2).padStart(64, '0')}${BigInt(parseFloat(amount) * 1_000_000).toString(16).padStart(64, '0')}` as `0x${string}`,
+      data: `0xa9059cbb${recipientAddress.slice(2).padStart(64, '0')}${BigInt(Math.floor(parsedAmount * 1_000_000)).toString(16).padStart(64, '0')}` as `0x${string}`,
     },
-  ];
+  ] : [];
 
   return (
     <>
