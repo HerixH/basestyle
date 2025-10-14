@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { useAccount, useConnect, useDisconnect } from "wagmi";
 import { useName } from "@coinbase/onchainkit/identity";
-import { createClient } from "../lib/supabase";
 import styles from "./WalletConnect.module.css";
 
 export default function WalletConnect() {
@@ -11,57 +10,13 @@ export default function WalletConnect() {
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
   const { data: baseName } = useName({ address: address as `0x${string}` });
-  const [isSaving, setIsSaving] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const supabase = createClient();
 
   // Prevent hydration mismatch
   useEffect(() => {
     setMounted(true);
   }, []);
-
-  // Save wallet address and Base Name to user profile when signed in (with debounce)
-  useEffect(() => {
-    if (!address || !isConnected || isSaving) return;
-
-    const timeoutId = setTimeout(async () => {
-      setIsSaving(true);
-      try {
-        const { data: { user } } = await supabase.auth.getUser();
-        if (user) {
-          // Check if already saved to prevent unnecessary updates
-          const currentWallet = user.user_metadata?.wallet_address;
-          const currentBaseName = user.user_metadata?.base_name;
-          
-          if (currentWallet === address && currentBaseName === baseName) {
-            setIsSaving(false);
-            return;
-          }
-          
-          const updateData: { wallet_address: string; base_name?: string } = { wallet_address: address };
-          
-          // Save Base Name if available
-          if (baseName) {
-            updateData.base_name = baseName;
-          }
-          
-          const { error } = await supabase.auth.updateUser({
-            data: updateData
-          });
-          if (error) {
-            console.error("Error saving wallet address:", error);
-          }
-        }
-      } catch (error) {
-        console.error("Error saving wallet:", error);
-      } finally {
-        setIsSaving(false);
-      }
-    }, 1000); // Debounce for 1 second
-
-    return () => clearTimeout(timeoutId);
-  }, [address, isConnected, baseName, isSaving, supabase.auth]);
 
   const handleConnect = () => {
     const coinbaseConnector = connectors.find((c) => c.id === "coinbaseWalletSDK");
