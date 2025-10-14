@@ -9,6 +9,25 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: minikitConfig.miniapp.name,
     description: minikitConfig.miniapp.description,
+    icons: {
+      icon: [
+        { url: '/icon', type: 'image/png', sizes: '32x32' },
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+      ],
+      apple: '/apple-icon',
+      shortcut: '/favicon.svg',
+    },
+    openGraph: {
+      title: minikitConfig.miniapp.name,
+      description: minikitConfig.miniapp.description,
+      images: ['/hero.png'],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: minikitConfig.miniapp.name,
+      description: minikitConfig.miniapp.description,
+      images: ['/hero.png'],
+    },
     viewport: {
       width: 'device-width',
       initialScale: 1,
