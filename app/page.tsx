@@ -6,6 +6,7 @@ import { createClient } from "./lib/supabase";
 import { useAccount } from "wagmi";
 import { useName } from "@coinbase/onchainkit/identity";
 import styles from "./page.module.css";
+import deleteStyles from "./components/DeleteModal.module.css";
 import PostCard from "./components/PostCard";
 import WalletConnect from "./components/WalletConnect";
 
@@ -51,6 +52,8 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPostCategory, setSelectedPostCategory] = useState("other");
+  const [editingPost, setEditingPost] = useState<Post | null>(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(null);
   const supabase = createClient();
 
   // User display name from wallet
@@ -304,6 +307,100 @@ export default function Home() {
     // Posts will update automatically via real-time subscription
   };
 
+  const handleEditPost = (post: Post) => {
+    setEditingPost(post);
+    setActivity(post.activity);
+    setSelectedPostCategory(post.category);
+    setImagePreview(post.image || null);
+    setShowPostForm(true);
+  };
+
+  const handleDeletePost = async (postId: string) => {
+    if (!isConnected || !address) {
+      alert("Please sign in first");
+      return;
+    }
+
+    const { error } = await supabase
+      .from('posts')
+      .delete()
+      .eq('id', postId)
+      .eq('wallet_address', address); // Security: only delete if owner
+
+    if (error) {
+      console.error('Error deleting post:', error);
+      alert('Failed to delete post. Please try again.');
+      return;
+    }
+
+    console.log(`Post ${postId} deleted`);
+    setShowDeleteConfirm(null);
+    // Posts will update automatically via real-time subscription
+  };
+
+  const handleUpdatePost = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    if (!editingPost || !isConnected || !address) {
+      setError("Please sign in to edit");
+      return;
+    }
+
+    if (!activity.trim()) {
+      setError("Please enter your activity");
+      return;
+    }
+
+    if (activity.length > 280) {
+      setError("Activity must be 280 characters or less");
+      return;
+    }
+
+    let imageUrl: string | undefined = editingPost.image;
+
+    // Upload new image if changed
+    if (imageFile) {
+      setUploading(true);
+      imageUrl = (await uploadImage(imageFile)) || editingPost.image;
+      setUploading(false);
+      
+      if (imageFile && !imageUrl) {
+        setError("Failed to upload image. Please try again.");
+        return;
+      }
+    }
+
+    // Update post in database
+    const { error: updateError } = await supabase
+      .from('posts')
+      .update({
+        activity: activity,
+        category: selectedPostCategory,
+        image: imageUrl,
+      })
+      .eq('id', editingPost.id)
+      .eq('wallet_address', address); // Security: only update if owner
+
+    if (updateError) {
+      console.error('Error updating post:', updateError);
+      setError('Failed to update post. Please try again.');
+      return;
+    }
+
+    console.log("Post updated:", editingPost.id);
+
+    // Reset form
+    setActivity("");
+    setImageFile(null);
+    setImagePreview(null);
+    setSelectedPostCategory("other");
+    setShowPostForm(false);
+    setEditingPost(null);
+    
+    // Posts will update automatically via real-time subscription
+  };
+
   return (
     <div className={styles.container}>
       <header className={styles.header}>
@@ -329,8 +426,8 @@ export default function Home() {
         {/* Post Form */}
         {showPostForm && (
           <div className={styles.postFormCard}>
-            <h2 className={styles.formTitle}>What did you do today?</h2>
-            <form onSubmit={handleSubmit} className={styles.postForm}>
+            <h2 className={styles.formTitle}>{editingPost ? 'Edit Your Activity' : 'What did you do today?'}</h2>
+            <form onSubmit={editingPost ? handleUpdatePost : handleSubmit} className={styles.postForm}>
               <textarea
                 placeholder="Share your daily activity... (e.g., Went to the gym, learned a new skill, helped someone)"
                 value={activity}
@@ -411,13 +508,14 @@ export default function Home() {
                     setImageFile(null);
                     setImagePreview(null);
                     setSelectedPostCategory("other");
+                    setEditingPost(null);
                     setError("");
                   }}
                 >
                   Cancel
                 </button>
                 <button type="submit" className={styles.submitButton} disabled={uploading}>
-                  {uploading ? "Uploading..." : "Post Activity"}
+                  {uploading ? "Uploading..." : (editingPost ? "Update Activity" : "Post Activity")}
                 </button>
               </div>
             </form>
@@ -483,10 +581,38 @@ export default function Home() {
                 onSendNFT={handleSendNFT}
                 onSendUSDC={handleSendUSDC}
                 currentWalletAddress={address}
+                onEdit={handleEditPost}
+                onDelete={(postId) => setShowDeleteConfirm(postId)}
               />
             ))
           )}
         </div>
+
+        {/* Delete Confirmation Dialog */}
+        {showDeleteConfirm && (
+          <div className={deleteStyles.modalOverlay} onClick={() => setShowDeleteConfirm(null)}>
+            <div className={deleteStyles.deleteModal} onClick={(e) => e.stopPropagation()}>
+              <h3 className={deleteStyles.deleteTitle}>Delete Post?</h3>
+              <p className={deleteStyles.deleteMessage}>
+                Are you sure you want to delete this post? This action cannot be undone.
+              </p>
+              <div className={deleteStyles.deleteActions}>
+                <button 
+                  className={deleteStyles.deleteCancelButton}
+                  onClick={() => setShowDeleteConfirm(null)}
+                >
+                  Cancel
+                </button>
+                <button 
+                  className={deleteStyles.deleteConfirmButton}
+                  onClick={() => handleDeletePost(showDeleteConfirm)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );

@@ -30,13 +30,17 @@ interface PostCardProps {
   onSendNFT: (postId: string) => void;
   onSendUSDC: (postId: string, amount: number, txHash: string) => void;
   currentWalletAddress?: string;
+  onEdit?: (post: Post) => void;
+  onDelete?: (postId: string) => void;
 }
 
 export default function PostCard({ 
   post, 
   onSendNFT, 
   onSendUSDC,
-  currentWalletAddress
+  currentWalletAddress,
+  onEdit,
+  onDelete
 }: PostCardProps) {
   // Check if this is the current user's post
   const isOwnPost = currentWalletAddress && post.wallet_address && post.wallet_address.toLowerCase() === currentWalletAddress.toLowerCase();
@@ -153,8 +157,21 @@ export default function PostCard({
         )}
         
         {isOwnPost && (
-          <div className={styles.ownPostBadge}>
-            Your post
+          <div className={styles.ownPostActions}>
+            <button 
+              className={styles.editButton}
+              onClick={() => onEdit?.(post)}
+              title="Edit post"
+            >
+              Edit
+            </button>
+            <button 
+              className={styles.deleteButton}
+              onClick={() => onDelete?.(post.id)}
+              title="Delete post"
+            >
+              Delete
+            </button>
           </div>
         )}
       </div>
