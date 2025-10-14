@@ -1,6 +1,6 @@
-# Baselifytle - Share Your Daily Wins
+# Baselifestyle - Share Your Daily Wins
 
-**Baselifytle** is a social mini app built on Base where users can share their daily activities and receive **USDC payments** and NFTs from people who love their content. It's a new way to celebrate productivity, motivation, and community engagement through blockchain rewards.
+**Baselifestyle** is a social mini app built on Base where users can share their daily activities and receive **USDC payments** and NFTs from people who love their content. It's a new way to celebrate productivity, motivation, and community engagement through blockchain rewards.
 
 ## ✨ Features
 

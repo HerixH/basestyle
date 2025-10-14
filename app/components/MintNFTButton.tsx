@@ -48,7 +48,7 @@ export default function MintNFTButton({
 
   // Create metadata URI (in production, upload to IPFS first)
   const metadataUri = `data:application/json;base64,${btoa(JSON.stringify({
-    name: `Baselifytle Appreciation`,
+    name: `Baselifestyle Appreciation`,
     description: `Appreciation for: "${activity.slice(0, 100)}..." by ${recipientName}`,
     attributes: [
       { trait_type: "Post ID", value: postId },

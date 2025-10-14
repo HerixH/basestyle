@@ -414,7 +414,7 @@ export function createAppreciationMetadata(
   category: string
 ): NFTMetadata {
   return {
-    name: `Baselifytle Appreciation #${postId.slice(0, 8)}`,
+    name: `Baselifestyle Appreciation #${postId.slice(0, 8)}`,
     description: `Appreciation NFT for: "${activity.slice(0, 100)}..." by ${userName}`,
     image: "ipfs://QmYourDefaultImageHash", // Replace with your default image
     attributes: [

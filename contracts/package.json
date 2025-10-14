@@ -1,7 +1,7 @@
 {
-  "name": "baselifytle-contracts",
+  "name": "baselifestyle-contracts",
   "version": "1.0.0",
-  "description": "Smart contracts for Baselifytle NFT appreciation system",
+  "description": "Smart contracts for Baselifestyle NFT appreciation system",
   "scripts": {
     "compile": "hardhat compile",
     "deploy:local": "hardhat run scripts/deploy.ts --network hardhat",

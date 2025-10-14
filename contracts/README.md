@@ -1,6 +1,6 @@
-# Baselifytle Smart Contracts
+# Baselifestyle Smart Contracts
 
-Smart contracts for the Baselifytle NFT appreciation system on Base.
+Smart contracts for the Baselifestyle NFT appreciation system on Base.
 
 ## Quick Start
 

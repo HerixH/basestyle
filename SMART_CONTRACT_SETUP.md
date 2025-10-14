@@ -1,6 +1,6 @@
 # Smart Contract Implementation Guide
 
-This guide will help you deploy and integrate the NFT smart contract for Baselifytle.
+This guide will help you deploy and integrate the NFT smart contract for Baselifestyle.
 
 ## 📋 Prerequisites
 

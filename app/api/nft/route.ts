@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
     
     // 1. Create NFT metadata
     const metadata = {
-      name: "Baselifytle Appreciation",
+      name: "Baselifestyle Appreciation",
       description: `NFT for post ${postId}`,
       image: "ipfs://YOUR_IMAGE_HASH",
       attributes: [

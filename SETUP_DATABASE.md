@@ -7,7 +7,7 @@ Your posts need to be saved to a database so they persist when you refresh the p
 ### Step 1: Create the Posts Table
 
 1. **Go to Supabase Dashboard**: https://app.supabase.com
-2. **Select your Baselifytle project**
+2. **Select your Baselifestyle project**
 3. **Click "SQL Editor"** in the left sidebar
 4. **Click "New query"**
 5. **Copy and paste this SQL code**:

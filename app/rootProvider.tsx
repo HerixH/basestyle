@@ -11,7 +11,7 @@ const wagmiConfig = createConfig({
   chains: [base],
   connectors: [
     coinbaseWallet({
-      appName: "Baselifytle",
+      appName: "Baselifestyle",
       preference: "smartWalletOnly",
     }),
   ],

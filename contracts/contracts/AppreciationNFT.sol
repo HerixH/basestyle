@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 /**
  * @title AppreciationNFT
- * @dev NFT contract for Baselifytle - Mint appreciation NFTs for posts
+ * @dev NFT contract for Baselifestyle - Mint appreciation NFTs for posts
  */
 contract AppreciationNFT is ERC721, ERC721URIStorage, Ownable {
     uint256 private _tokenIdCounter;
@@ -34,7 +34,7 @@ contract AppreciationNFT is ERC721, ERC721URIStorage, Ownable {
         string tokenURI
     );
 
-    constructor() ERC721("Baselifytle Appreciation", "BAPP") Ownable(msg.sender) {}
+    constructor() ERC721("Baselifestyle Appreciation", "BAPP") Ownable(msg.sender) {}
 
     /**
      * @dev Mint an appreciation NFT

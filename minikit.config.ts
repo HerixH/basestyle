@@ -15,7 +15,7 @@ export const minikitConfig = {
   },
   miniapp: {
     version: "1",
-    name: "Baselifytle", 
+    name: "Baselifestyle", 
     subtitle: "Share Your Daily Wins", 
     description: "Post your daily activities and receive NFTs from supporters who love your content",
     screenshotUrls: [`${ROOT_URL}/screenshot-portrait.png`],
@@ -28,7 +28,7 @@ export const minikitConfig = {
     tags: ["social", "nft", "activity", "lifestyle", "community"],
     heroImageUrl: `${ROOT_URL}/hero.png`, 
     tagline: "Share your daily activities, earn NFTs",
-    ogTitle: "Baselifytle - Share Your Daily Wins",
+    ogTitle: "Baselifestyle - Share Your Daily Wins",
     ogDescription: "Post your daily activities and receive NFTs from people who love your content",
     ogImageUrl: `${ROOT_URL}/hero.png`,
   },
