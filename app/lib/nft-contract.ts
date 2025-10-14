@@ -1,5 +1,5 @@
 import { createPublicClient, createWalletClient, custom, http } from 'viem';
-import { base, baseSepolia } from 'viem/chains';
+import { base } from 'viem/chains';
 
 // Contract ABI for AppreciationNFT (baselifestyle)
 export const APPRECIATION_NFT_ABI = [
@@ -386,9 +386,8 @@ export const APPRECIATION_NFT_ABI = [
 // Get contract address from environment
 export const NFT_CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_NFT_CONTRACT_ADDRESS as `0x${string}`;
 
-// Determine chain (use testnet for development)
-const isProduction = process.env.NODE_ENV === 'production';
-export const CHAIN = isProduction ? base : baseSepolia;
+// Use Base mainnet (change to baseSepolia if your contract is on testnet)
+export const CHAIN = base;
 
 // Create public client for reading from the contract
 export const publicClient = createPublicClient({
