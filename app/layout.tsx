@@ -9,6 +9,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: minikitConfig.miniapp.name,
     description: minikitConfig.miniapp.description,
+    viewport: {
+      width: 'device-width',
+      initialScale: 1,
+      maximumScale: 1,
+    },
     other: {
       "fc:frame": JSON.stringify({
         version: minikitConfig.miniapp.version,
@@ -35,18 +40,20 @@ const sourceCodePro = Source_Code_Pro({
   subsets: ["latin"],
 });
 
+export const dynamic = 'force-dynamic';
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <RootProvider>
-      <html lang="en">
-        <body className={`${inter.variable} ${sourceCodePro.variable}`}>
+    <html lang="en">
+      <body className={`${inter.variable} ${sourceCodePro.variable}`}>
+        <RootProvider>
           <SafeArea>{children}</SafeArea>
-        </body>
-      </html>
-    </RootProvider>
+        </RootProvider>
+      </body>
+    </html>
   );
 }

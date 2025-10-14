@@ -1,59 +1,47 @@
 "use client";
-
-import { useComposeCast } from '@coinbase/onchainkit/minikit';
-import { minikitConfig } from "../../minikit.config";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useMiniKit } from "@coinbase/onchainkit/minikit";
 import styles from "./page.module.css";
 
 export default function Success() {
+  const router = useRouter();
+  const { context } = useMiniKit();
 
-  const { composeCastAsync } = useComposeCast();
-  
-  const handleShare = async () => {
-    try {
-      const text = `Yay! I just joined the waitlist for ${minikitConfig.miniapp.name.toUpperCase()}! `;
-      
-      const result = await composeCastAsync({
-        text: text,
-        embeds: [process.env.NEXT_PUBLIC_URL || ""]
-      });
+  useEffect(() => {
+    // Redirect back to home after 3 seconds
+    const timer = setTimeout(() => {
+      router.push("/");
+    }, 3000);
 
-      // result.cast can be null if user cancels
-      if (result?.cast) {
-        console.log("Cast created successfully:", result.cast.hash);
-      } else {
-        console.log("User cancelled the cast");
-      }
-    } catch (error) {
-      console.error("Error sharing cast:", error);
-    }
-  };
+    return () => clearTimeout(timer);
+  }, [router]);
 
   return (
     <div className={styles.container}>
-      <button className={styles.closeButton} type="button">
-        ✕
-      </button>
-      
       <div className={styles.content}>
-        <div className={styles.successMessage}>
-          <div className={styles.checkmark}>
-            <div className={styles.checkmarkCircle}>
-              <div className={styles.checkmarkStem}></div>
-              <div className={styles.checkmarkKick}></div>
-            </div>
-          </div>
-          
-          <h1 className={styles.title}>Welcome to the {minikitConfig.miniapp.name.toUpperCase()}!</h1>
-          
-          <p className={styles.subtitle}>
-            You&apos;re in! We&apos;ll notify you as soon as we launch.<br />
-            Get ready to experience the future of onchain marketing.
-          </p>
+        <div className={styles.successIcon}>✨</div>
+        
+        <h1 className={styles.title}>Activity Posted!</h1>
+        
+        <p className={styles.message}>
+          Great job, {context?.user?.displayName || "there"}! Your activity has been shared with the community.
+        </p>
 
-          <button onClick={handleShare} className={styles.shareButton}>
-            SHARE
-          </button>
+        <div className={styles.info}>
+          <p>People can now send you NFTs to show their appreciation! 💎</p>
         </div>
+
+        <button 
+          className={styles.backButton}
+          onClick={() => router.push("/")}
+        >
+          Back to Feed
+        </button>
+
+        <p className={styles.autoRedirect}>
+          Redirecting in 3 seconds...
+        </p>
       </div>
     </div>
   );
