@@ -120,52 +120,31 @@ export default async function Image() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '12px',
               background: 'rgba(255, 255, 255, 0.2)',
               backdropFilter: 'blur(10px)',
-              padding: '16px 28px',
+              padding: '16px 32px',
               borderRadius: '50px',
-              fontSize: '24px',
+              fontSize: '26px',
               color: 'white',
               fontWeight: '600',
             }}
           >
-            <span style={{ fontSize: '32px', display: 'flex' }}>💰</span>
-            <span style={{ display: 'flex' }}>USDC Rewards</span>
+            USDC Rewards
           </div>
           <div
             style={{
               display: 'flex',
               alignItems: 'center',
-              gap: '12px',
               background: 'rgba(255, 255, 255, 0.2)',
               backdropFilter: 'blur(10px)',
-              padding: '16px 28px',
+              padding: '16px 32px',
               borderRadius: '50px',
-              fontSize: '24px',
+              fontSize: '26px',
               color: 'white',
               fontWeight: '600',
             }}
           >
-            <span style={{ fontSize: '32px', display: 'flex' }}>🎨</span>
-            <span style={{ display: 'flex' }}>NFT Minting</span>
-          </div>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              background: 'rgba(255, 255, 255, 0.2)',
-              backdropFilter: 'blur(10px)',
-              padding: '16px 28px',
-              borderRadius: '50px',
-              fontSize: '24px',
-              color: 'white',
-              fontWeight: '600',
-            }}
-          >
-            <span style={{ fontSize: '32px', display: 'flex' }}>🔵</span>
-            <span style={{ display: 'flex' }}>Built on Base</span>
+            NFT Minting
           </div>
         </div>
       </div>
