@@ -20,13 +20,13 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: minikitConfig.miniapp.name,
       description: minikitConfig.miniapp.description,
-      images: ['/hero.png'],
+      type: 'website',
+      siteName: minikitConfig.miniapp.name,
     },
     twitter: {
       card: 'summary_large_image',
       title: minikitConfig.miniapp.name,
       description: minikitConfig.miniapp.description,
-      images: ['/hero.png'],
     },
     viewport: {
       width: 'device-width',
