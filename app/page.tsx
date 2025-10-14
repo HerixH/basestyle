@@ -54,6 +54,7 @@ export default function Home() {
   const [selectedPostCategory, setSelectedPostCategory] = useState("other");
   const [editingPost, setEditingPost] = useState<Post | null>(null);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState("");
   const supabase = createClient();
 
   // User display name from wallet
@@ -262,7 +263,7 @@ export default function Home() {
 
   const handleSendNFT = async (postId: string) => {
     if (!isConnected || !address) {
-      alert("Please sign in first");
+      setError("Please sign in first");
       return;
     }
 
@@ -278,7 +279,7 @@ export default function Home() {
 
     if (error) {
       console.error('Error updating NFT count:', error);
-      alert('Failed to mint NFT. Please try again.');
+      setError('Failed to mint NFT. Please try again.');
       return;
     }
 
@@ -299,7 +300,7 @@ export default function Home() {
 
     if (error) {
       console.error('Error updating USDC earned:', error);
-      alert('Failed to record USDC payment. Please try again.');
+      setError('Failed to record USDC payment. Please try again.');
       return;
     }
 
@@ -317,25 +318,34 @@ export default function Home() {
 
   const handleDeletePost = async (postId: string) => {
     if (!isConnected || !address) {
-      alert("Please sign in first");
+      setError("Please sign in first");
+      setShowDeleteConfirm(null);
       return;
     }
 
-    const { error } = await supabase
-      .from('posts')
-      .delete()
-      .eq('id', postId)
-      .eq('wallet_address', address); // Security: only delete if owner
+    try {
+      const { error } = await supabase
+        .from('posts')
+        .delete()
+        .eq('id', postId)
+        .eq('wallet_address', address); // Security: only delete if owner
 
-    if (error) {
-      console.error('Error deleting post:', error);
-      alert('Failed to delete post. Please try again.');
-      return;
+      if (error) {
+        console.error('Error deleting post:', error);
+        setError('Failed to delete post. Please try again.');
+        return;
+      }
+
+      console.log(`Post ${postId} deleted`);
+      setShowDeleteConfirm(null);
+      setSuccessMessage("Post deleted successfully");
+      setTimeout(() => setSuccessMessage(""), 3000);
+      // Posts will update automatically via real-time subscription
+    } catch (err) {
+      console.error('Delete error:', err);
+      setError('An error occurred while deleting the post.');
+      setShowDeleteConfirm(null);
     }
-
-    console.log(`Post ${postId} deleted`);
-    setShowDeleteConfirm(null);
-    // Posts will update automatically via real-time subscription
   };
 
   const handleUpdatePost = async (e: React.FormEvent) => {
@@ -397,6 +407,8 @@ export default function Home() {
     setSelectedPostCategory("other");
     setShowPostForm(false);
     setEditingPost(null);
+    setSuccessMessage("Post updated successfully");
+    setTimeout(() => setSuccessMessage(""), 3000);
     
     // Posts will update automatically via real-time subscription
   };
@@ -413,6 +425,17 @@ export default function Home() {
       </header>
 
       <main className={styles.main}>
+        {/* Success/Error Notifications */}
+        {successMessage && (
+          <div className={styles.successNotification}>
+            ✓ {successMessage}
+          </div>
+        )}
+        {error && !showPostForm && (
+          <div className={styles.errorNotification}>
+            ✗ {error}
+          </div>
+        )}
         {/* Post Button - Only show when wallet is connected */}
         {isConnected && !showPostForm && (
           <button 

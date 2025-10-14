@@ -79,6 +79,41 @@
   padding: 2.5rem 2rem;
 }
 
+/* Success/Error Notifications */
+.successNotification, .errorNotification {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  z-index: 999;
+  animation: slideInRight 0.3s ease;
+}
+
+.successNotification {
+  background: #10b981;
+  color: white;
+}
+
+.errorNotification {
+  background: #ef4444;
+  color: white;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .createPostButton {
   width: 100%;
   background: var(--primary);
