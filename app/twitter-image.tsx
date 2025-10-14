@@ -14,147 +14,158 @@ export default async function Image() {
     (
       <div
         style={{
-          background: 'linear-gradient(135deg, #0052FF 0%, #0041CC 100%)',
-          width: '100%',
           height: '100%',
+          width: '100%',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '60px',
-          position: 'relative',
+          alignItems: 'flex-start',
+          justifyContent: 'space-between',
+          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+          padding: '80px',
+          fontFamily: 'system-ui, -apple-system, sans-serif',
         }}
       >
-        {/* Decorative circles */}
+        {/* Abstract background elements */}
         <div
           style={{
             position: 'absolute',
-            top: '50px',
-            right: '50px',
-            width: '200px',
-            height: '200px',
+            top: '-100px',
+            right: '-100px',
+            width: '400px',
+            height: '400px',
             borderRadius: '50%',
-            background: 'rgba(255, 255, 255, 0.1)',
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 100%)',
             display: 'flex',
           }}
         />
         <div
           style={{
             position: 'absolute',
-            bottom: '80px',
-            left: '80px',
-            width: '150px',
-            height: '150px',
+            bottom: '-150px',
+            left: '-150px',
+            width: '500px',
+            height: '500px',
             borderRadius: '50%',
-            background: 'rgba(255, 255, 255, 0.08)',
+            background: 'linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.03) 100%)',
             display: 'flex',
           }}
         />
         
-        {/* Main content */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            textAlign: 'center',
-            zIndex: 1,
-          }}
-        >
-          {/* Logo/Icon */}
+        {/* Top section - Branding */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px', zIndex: 1 }}>
           <div
             style={{
-              width: '160px',
-              height: '160px',
-              borderRadius: '40px',
-              background: 'white',
+              width: '80px',
+              height: '80px',
+              borderRadius: '20px',
+              background: 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '100px',
+              fontSize: '48px',
               fontWeight: 'bold',
-              color: '#0052FF',
-              marginBottom: '40px',
-              boxShadow: '0 20px 60px rgba(0, 0, 0, 0.3)',
+              color: 'white',
+              boxShadow: '0 10px 40px rgba(0, 0, 0, 0.3)',
             }}
           >
             B
           </div>
-          
-          {/* Title */}
           <div
             style={{
-              fontSize: '72px',
+              fontSize: '42px',
               fontWeight: 'bold',
               color: 'white',
-              marginBottom: '20px',
-              letterSpacing: '-2px',
               display: 'flex',
+              letterSpacing: '-1px',
             }}
           >
             Baselifestyle
           </div>
-          
-          {/* Subtitle */}
+        </div>
+
+        {/* Middle section - Main message */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', zIndex: 1 }}>
           <div
             style={{
-              fontSize: '36px',
-              color: 'rgba(255, 255, 255, 0.9)',
-              marginBottom: '40px',
+              fontSize: '68px',
+              fontWeight: 'bold',
+              color: 'white',
+              lineHeight: 1.2,
               display: 'flex',
+              flexDirection: 'column',
+              maxWidth: '900px',
             }}
           >
-            Share Your Daily Wins
+            <span style={{ display: 'flex' }}>Share Your</span>
+            <span style={{ display: 'flex', background: 'linear-gradient(90deg, #FFD700 0%, #FFA500 100%)', backgroundClip: 'text', color: 'transparent', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              Daily Wins
+            </span>
           </div>
-          
-          {/* Features */}
+          <div
+            style={{
+              fontSize: '32px',
+              color: 'rgba(255, 255, 255, 0.85)',
+              display: 'flex',
+              maxWidth: '800px',
+              lineHeight: 1.4,
+            }}
+          >
+            Post your activities, earn USDC payments, and collect NFTs on Base
+          </div>
+        </div>
+
+        {/* Bottom section - Features */}
+        <div style={{ display: 'flex', gap: '24px', zIndex: 1, flexWrap: 'wrap' }}>
           <div
             style={{
               display: 'flex',
-              gap: '40px',
-              marginTop: '20px',
+              alignItems: 'center',
+              gap: '12px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              backdropFilter: 'blur(10px)',
+              padding: '16px 28px',
+              borderRadius: '50px',
+              fontSize: '24px',
+              color: 'white',
+              fontWeight: '600',
             }}
           >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                fontSize: '24px',
-                color: 'white',
-                background: 'rgba(255, 255, 255, 0.15)',
-                padding: '12px 24px',
-                borderRadius: '20px',
-              }}
-            >
-              💰 Earn USDC
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                fontSize: '24px',
-                color: 'white',
-                background: 'rgba(255, 255, 255, 0.15)',
-                padding: '12px 24px',
-                borderRadius: '20px',
-              }}
-            >
-              🎨 Mint NFTs
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                fontSize: '24px',
-                color: 'white',
-                background: 'rgba(255, 255, 255, 0.15)',
-                padding: '12px 24px',
-                borderRadius: '20px',
-              }}
-            >
-              🔵 Built on Base
-            </div>
+            <span style={{ fontSize: '32px', display: 'flex' }}>💰</span>
+            <span style={{ display: 'flex' }}>USDC Rewards</span>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              backdropFilter: 'blur(10px)',
+              padding: '16px 28px',
+              borderRadius: '50px',
+              fontSize: '24px',
+              color: 'white',
+              fontWeight: '600',
+            }}
+          >
+            <span style={{ fontSize: '32px', display: 'flex' }}>🎨</span>
+            <span style={{ display: 'flex' }}>NFT Minting</span>
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '12px',
+              background: 'rgba(255, 255, 255, 0.2)',
+              backdropFilter: 'blur(10px)',
+              padding: '16px 28px',
+              borderRadius: '50px',
+              fontSize: '24px',
+              color: 'white',
+              fontWeight: '600',
+            }}
+          >
+            <span style={{ fontSize: '32px', display: 'flex' }}>🔵</span>
+            <span style={{ display: 'flex' }}>Built on Base</span>
           </div>
         </div>
       </div>
