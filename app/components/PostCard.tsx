@@ -1,6 +1,4 @@
 "use client";
-import { useState, useEffect } from "react";
-import { createClient } from "../lib/supabase";
 import styles from "./PostCard.module.css";
 import SendUSDCButton from "./SendUSDCButton";
 import MintNFTButton from "./MintNFTButton";
@@ -40,8 +38,6 @@ export default function PostCard({
   onSendUSDC,
   currentWalletAddress
 }: PostCardProps) {
-  const [isSending, setIsSending] = useState(false);
-  
   // Check if this is the current user's post
   const isOwnPost = currentWalletAddress && post.wallet_address && post.wallet_address.toLowerCase() === currentWalletAddress.toLowerCase();
 

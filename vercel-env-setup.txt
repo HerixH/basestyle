@@ -1,0 +1,24 @@
+COPY AND PASTE THESE VALUES INTO VERCEL DASHBOARD:
+
+1. Go to: https://vercel.com/herix-hangandus-projects/baselifytle/settings/environment-variables
+
+2. Click "Add New" for each variable:
+
+Variable Name: NEXT_PUBLIC_NFT_CONTRACT_ADDRESS
+Value: 0xc8BeAe45efC5bFad0B5f112C7c1953E22B01cc6F
+Environments: Select all (Production, Preview, Development)
+
+Variable Name: NEXT_PUBLIC_SUPABASE_URL
+Value: [GET FROM YOUR SUPABASE DASHBOARD]
+Environments: Select all (Production, Preview, Development)
+
+Variable Name: NEXT_PUBLIC_SUPABASE_ANON_KEY
+Value: [GET FROM YOUR SUPABASE DASHBOARD]
+Environments: Select all (Production, Preview, Development)
+
+Variable Name: NEXT_PUBLIC_CDP_API_KEY (Optional)
+Value: [GET FROM COINBASE DEVELOPER PLATFORM]
+Environments: Select all (Production, Preview, Development)
+
+3. After adding all variables, click "Redeploy" on your latest deployment
+

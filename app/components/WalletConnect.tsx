@@ -39,7 +39,7 @@ export default function WalletConnect() {
             return;
           }
           
-          const updateData: any = { wallet_address: address };
+          const updateData: { wallet_address: string; base_name?: string } = { wallet_address: address };
           
           // Save Base Name if available
           if (baseName) {
@@ -61,7 +61,7 @@ export default function WalletConnect() {
     }, 1000); // Debounce for 1 second
 
     return () => clearTimeout(timeoutId);
-  }, [address, isConnected, baseName]);
+  }, [address, isConnected, baseName, isSaving, supabase.auth]);
 
   const handleConnect = () => {
     const coinbaseConnector = connectors.find((c) => c.id === "coinbaseWalletSDK");

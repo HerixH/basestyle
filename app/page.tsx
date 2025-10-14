@@ -46,8 +46,8 @@ export default function Home() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [dbError, setDbError] = useState<string | null>(null);
+  const [_loading, setLoading] = useState(true);
+  const [_dbError, setDbError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPostCategory, setSelectedPostCategory] = useState("other");
@@ -160,7 +160,7 @@ export default function Home() {
 
       console.log('Uploading image:', { fileName, filePath, fileSize: file.size });
 
-      const { data, error } = await supabase.storage
+      const { error } = await supabase.storage
         .from('post-images')
         .upload(filePath, file, {
           cacheControl: '3600',
