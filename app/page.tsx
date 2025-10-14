@@ -251,14 +251,21 @@ export default function Home() {
     console.log("New post created:", newPost);
     console.log("Image URL:", imageUrl);
 
+    // Immediately add new post to local state for instant feedback
+    if (newPost) {
+      setPosts(prevPosts => [newPost as Post, ...prevPosts]);
+    }
+
     // Reset form
     setActivity("");
     setImageFile(null);
     setImagePreview(null);
     setSelectedPostCategory("other");
     setShowPostForm(false);
+    setSuccessMessage("Post created successfully!");
+    setTimeout(() => setSuccessMessage(""), 3000);
     
-    // Posts will update automatically via real-time subscription
+    // Real-time subscription will keep it in sync
   };
 
   const handleSendNFT = async (postId: string) => {
@@ -337,10 +344,14 @@ export default function Home() {
       }
 
       console.log(`Post ${postId} deleted`);
+      
+      // Immediately remove post from local state for instant feedback
+      setPosts(prevPosts => prevPosts.filter(p => p.id !== postId));
+      
       setShowDeleteConfirm(null);
       setSuccessMessage("Post deleted successfully");
       setTimeout(() => setSuccessMessage(""), 3000);
-      // Posts will update automatically via real-time subscription
+      // Real-time subscription will keep it in sync
     } catch (err) {
       console.error('Delete error:', err);
       setError('An error occurred while deleting the post.');
@@ -400,6 +411,13 @@ export default function Home() {
 
     console.log("Post updated:", editingPost.id);
 
+    // Immediately update post in local state for instant feedback
+    setPosts(prevPosts => prevPosts.map(p => 
+      p.id === editingPost.id 
+        ? { ...p, activity, category: selectedPostCategory, image: imageUrl }
+        : p
+    ));
+
     // Reset form
     setActivity("");
     setImageFile(null);
@@ -410,7 +428,7 @@ export default function Home() {
     setSuccessMessage("Post updated successfully");
     setTimeout(() => setSuccessMessage(""), 3000);
     
-    // Posts will update automatically via real-time subscription
+    // Real-time subscription will keep it in sync
   };
 
   return (
