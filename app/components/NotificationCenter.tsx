@@ -7,6 +7,7 @@ const NotificationCenter: React.FC = () => {
   const {
     notifications,
     unreadCount,
+    addNotification,
     markAsRead,
     markAllAsRead,
     clearNotification,
