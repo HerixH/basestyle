@@ -60,7 +60,7 @@ export default function WalletConnect() {
           <div className={styles.modalOverlay} onClick={() => setShowModal(false)}>
             <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
               <button className={styles.closeButton} onClick={() => setShowModal(false)}>
-                ✕
+                ×
               </button>
               
               <h2 className={styles.modalTitle}>Signed In</h2>

@@ -446,12 +446,12 @@ export default function Home() {
         {/* Success/Error Notifications */}
         {successMessage && (
           <div className={styles.successNotification}>
-            ✓ {successMessage}
+            {successMessage}
           </div>
         )}
         {error && !showPostForm && (
           <div className={styles.errorNotification}>
-            ✗ {error}
+            {error}
           </div>
         )}
         {/* Post Button - Only show when wallet is connected */}
@@ -532,7 +532,7 @@ export default function Home() {
                       setImagePreview(null);
                     }}
                   >
-                    ✕
+                    ×
                   </button>
                 </div>
               )}
@@ -582,7 +582,7 @@ export default function Home() {
                 onClick={() => setSearchQuery("")}
                 aria-label="Clear search"
               >
-                ✕
+                ×
               </button>
             )}
           </div>

@@ -72,6 +72,10 @@
   letter-spacing: -0.5px;
 }
 
+.logo::first-letter {
+  color: #0052FF;
+}
+
 
 .main {
   max-width: 680px;

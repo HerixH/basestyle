@@ -75,7 +75,7 @@ export default function SendUSDCButton({
               className={styles.closeButton}
               onClick={() => setShowModal(false)}
             >
-              ✕
+              ×
             </button>
 
             <h2 className={styles.modalTitle}>Send USDC to {recipientName}</h2>
