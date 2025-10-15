@@ -2,15 +2,26 @@
 import { useEffect, useRef } from 'react';
 import { useNotifications } from '../contexts/NotificationContext';
 
-interface UseNotificationTriggersProps {
-  isConnected: boolean;
-  address?: string;
-  posts: any[];
+interface Post {
+  id: string;
+  wallet_address?: string | null;
+  user_name: string;
+  activity: string;
+  category: string;
+  image?: string;
+  timestamp: number;
+  nft_count: number;
+  usdc_earned: number;
 }
 
-export const useNotificationTriggers = ({ isConnected, address, posts }: UseNotificationTriggersProps) => {
+interface UseNotificationTriggersProps {
+  address?: string;
+  posts: Post[];
+}
+
+export const useNotificationTriggers = ({ address, posts }: UseNotificationTriggersProps) => {
   const { addNotification, clearAllNotifications } = useNotifications();
-  const previousPostsRef = useRef<any[]>([]);
+  const previousPostsRef = useRef<Post[]>([]);
   const previousUsdcRef = useRef<Record<string, number>>({});
   const previousNftRef = useRef<Record<string, number>>({});
   const hasInitialized = useRef(false);

@@ -8,7 +8,7 @@ interface Notification {
   message: string;
   timestamp: number;
   read: boolean;
-  data?: any;
+  data?: Record<string, unknown>;
 }
 
 interface NotificationContextType {

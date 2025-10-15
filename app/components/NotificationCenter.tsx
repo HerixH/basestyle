@@ -68,7 +68,6 @@ const NotificationCenter: React.FC = () => {
     const granted = await requestPermission();
     if (granted) {
       // Show success notification
-      const { addNotification } = useNotifications();
       addNotification({
         type: 'success',
         title: 'Notifications Enabled',

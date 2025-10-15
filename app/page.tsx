@@ -63,7 +63,7 @@ export default function Home() {
   const userName = baseName || (address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Anonymous');
 
   // Initialize notification triggers
-  useNotificationTriggers({ isConnected, address, posts });
+  useNotificationTriggers({ address, posts });
 
   // Initialize the miniapp
   useEffect(() => {
