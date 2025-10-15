@@ -9,6 +9,8 @@ import styles from "./page.module.css";
 import deleteStyles from "./components/DeleteModal.module.css";
 import PostCard from "./components/PostCard";
 import WalletConnect from "./components/WalletConnect";
+import NotificationCenter from "./components/NotificationCenter";
+import { useNotificationTriggers } from "./hooks/useNotificationTriggers";
 
 export const dynamic = 'force-dynamic';
 
@@ -59,6 +61,9 @@ export default function Home() {
 
   // User display name from wallet
   const userName = baseName || (address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Anonymous');
+
+  // Initialize notification triggers
+  useNotificationTriggers({ isConnected, address, posts });
 
   // Initialize the miniapp
   useEffect(() => {
@@ -437,6 +442,7 @@ export default function Home() {
         <div className={styles.headerContent}>
           <h1 className={styles.logo}>{minikitConfig.miniapp.name}</h1>
           <div className={styles.headerActions}>
+            <NotificationCenter />
             <WalletConnect />
           </div>
         </div>

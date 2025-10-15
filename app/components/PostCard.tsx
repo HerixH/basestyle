@@ -156,21 +156,23 @@ export default function PostCard({
           </div>
         )}
         
-        {isOwnPost && (
+        {((isOwnPost && onDelete) || (!post.wallet_address && onDelete)) && (
           <div className={styles.ownPostActions}>
+            {isOwnPost && onEdit && (
+              <button 
+                className={styles.editButton}
+                onClick={() => onEdit?.(post)}
+                title="Edit post"
+              >
+                Edit
+              </button>
+            )}
             <button 
-              className={styles.editButton}
-              onClick={() => onEdit?.(post)}
-              title="Edit post"
-            >
-              Edit
-            </button>
-            <button 
-              className={styles.deleteButton}
+              className={!post.wallet_address ? styles.oldPostDeleteButton : styles.deleteButton}
               onClick={() => onDelete?.(post.id)}
-              title="Delete post"
+              title={!post.wallet_address ? "Delete old post" : "Delete post"}
             >
-              Delete
+              {!post.wallet_address ? "Delete Old Post" : "Delete"}
             </button>
           </div>
         )}

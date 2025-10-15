@@ -6,6 +6,7 @@ import { base } from "viem/chains";
 import { ReactNode, useState } from "react";
 import { WagmiProvider, createConfig, http } from "wagmi";
 import { coinbaseWallet } from "wagmi/connectors";
+import { NotificationProvider } from "./contexts/NotificationContext";
 
 const wagmiConfig = createConfig({
   chains: [base],
@@ -32,7 +33,9 @@ export function RootProvider({ children }: { children: ReactNode }) {
           chain={base}
           miniKit={{ enabled: true }}
         >
-          {children}
+          <NotificationProvider>
+            {children}
+          </NotificationProvider>
         </OnchainKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

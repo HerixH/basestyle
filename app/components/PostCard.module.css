@@ -224,6 +224,17 @@
   box-shadow: 0 4px 12px rgba(255, 68, 68, 0.2);
 }
 
+.oldPostDeleteButton {
+  background: #ff8800;
+  color: white;
+}
+
+.oldPostDeleteButton:hover {
+  background: #cc6600;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 136, 0, 0.2);
+}
+
 .editButton:active, .deleteButton:active {
   transform: translateY(0);
 }
