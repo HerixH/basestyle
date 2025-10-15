@@ -166,7 +166,7 @@ export const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ 
 // Play different sounds for different notification types
 const playNotificationSound = (type: Notification['type']) => {
   try {
-    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const audioContext = new (window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext)();
     
     // Create different tones for different notification types
     let frequency: number;
