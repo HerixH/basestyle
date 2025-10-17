@@ -90,7 +90,7 @@ export default function ShareButton({ post, appUrl, currentWalletAddress }: Shar
                     ${(post.usdc_earned / 100).toFixed(2)} USDC • {post.nft_count} NFTs
                   </span>
                 </div>
-                <p className={styles.previewText}>"{post.activity}"</p>
+                <p className={styles.previewText}>&ldquo;{post.activity}&rdquo;</p>
                 <p className={`${styles.previewAuthor} ${isOwnPost ? styles.ownPost : styles.otherPost}`}>
                   {isOwnPost ? 'by you' : `by ${post.user_name}`}
                 </p>
