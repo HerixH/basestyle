@@ -630,6 +630,7 @@ export default function Home() {
                 currentWalletAddress={address}
                 onEdit={handleEditPost}
                 onDelete={(postId) => setShowDeleteConfirm(postId)}
+                appUrl={typeof window !== 'undefined' ? window.location.origin : 'https://baselifestyle.app'}
               />
             ))
           )}

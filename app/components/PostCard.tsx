@@ -2,6 +2,7 @@
 import styles from "./PostCard.module.css";
 import SendUSDCButton from "./SendUSDCButton";
 import MintNFTButton from "./MintNFTButton";
+import ShareButton from "./ShareButton";
 
 interface Post {
   id: string;
@@ -32,6 +33,7 @@ interface PostCardProps {
   currentWalletAddress?: string;
   onEdit?: (post: Post) => void;
   onDelete?: (postId: string) => void;
+  appUrl?: string;
 }
 
 export default function PostCard({ 
@@ -40,7 +42,8 @@ export default function PostCard({
   onSendUSDC,
   currentWalletAddress,
   onEdit,
-  onDelete
+  onDelete,
+  appUrl = window.location.origin
 }: PostCardProps) {
   // Check if this is the current user's post
   const isOwnPost = currentWalletAddress && post.wallet_address && post.wallet_address.toLowerCase() === currentWalletAddress.toLowerCase();
@@ -124,58 +127,64 @@ export default function PostCard({
       </div>
 
       <div className={styles.footer}>
-        {!isOwnPost && (
-          <div className={styles.actions}>
-            {recipientWallet ? (
-              <SendUSDCButton
-                postId={post.id}
-                recipientAddress={recipientWallet}
-                recipientName={post.user_name}
-                onSuccess={handleUSDCSuccess}
-              />
-            ) : (
-              <div className={styles.noWalletHint}>
-                Creator hasn&apos;t signed in
-              </div>
-            )}
-            
-            {recipientWallet ? (
-              <MintNFTButton
-                postId={post.id}
-                recipientAddress={recipientWallet}
-                recipientName={post.user_name}
-                activity={post.activity}
-                category={post.category}
-                onSuccess={handleNFTSuccess}
-              />
-            ) : (
-              <button className={styles.sendNftButton} disabled>
-                Mint NFT
-              </button>
-            )}
-          </div>
-        )}
+        <div className={styles.leftActions}>
+          <ShareButton post={post} appUrl={appUrl} currentWalletAddress={currentWalletAddress} />
+        </div>
         
-        {((isOwnPost && onDelete) || (!post.wallet_address && onDelete)) && (
-          <div className={styles.ownPostActions}>
-            {isOwnPost && onEdit && (
+        <div className={styles.rightActions}>
+          {!isOwnPost && (
+            <div className={styles.actions}>
+              {recipientWallet ? (
+                <SendUSDCButton
+                  postId={post.id}
+                  recipientAddress={recipientWallet}
+                  recipientName={post.user_name}
+                  onSuccess={handleUSDCSuccess}
+                />
+              ) : (
+                <div className={styles.noWalletHint}>
+                  Creator hasn&apos;t signed in
+                </div>
+              )}
+              
+              {recipientWallet ? (
+                <MintNFTButton
+                  postId={post.id}
+                  recipientAddress={recipientWallet}
+                  recipientName={post.user_name}
+                  activity={post.activity}
+                  category={post.category}
+                  onSuccess={handleNFTSuccess}
+                />
+              ) : (
+                <button className={styles.sendNftButton} disabled>
+                  Mint NFT
+                </button>
+              )}
+            </div>
+          )}
+          
+          {((isOwnPost && onDelete) || (!post.wallet_address && onDelete)) && (
+            <div className={styles.ownPostActions}>
+              {isOwnPost && onEdit && (
+                <button 
+                  className={styles.editButton}
+                  onClick={() => onEdit?.(post)}
+                  title="Edit post"
+                >
+                  Edit
+                </button>
+              )}
               <button 
-                className={styles.editButton}
-                onClick={() => onEdit?.(post)}
-                title="Edit post"
+                className={!post.wallet_address ? styles.oldPostDeleteButton : styles.deleteButton}
+                onClick={() => onDelete?.(post.id)}
+                title={!post.wallet_address ? "Delete old post" : "Delete post"}
               >
-                Edit
+                {!post.wallet_address ? "Delete Old Post" : "Delete"}
               </button>
-            )}
-            <button 
-              className={!post.wallet_address ? styles.oldPostDeleteButton : styles.deleteButton}
-              onClick={() => onDelete?.(post.id)}
-              title={!post.wallet_address ? "Delete old post" : "Delete post"}
-            >
-              {!post.wallet_address ? "Delete Old Post" : "Delete"}
-            </button>
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

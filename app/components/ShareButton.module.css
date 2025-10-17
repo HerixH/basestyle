@@ -1,0 +1,290 @@
+.shareButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shareButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  background: #0d8bd9;
+}
+
+.shareButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shareIcon {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.shareModal {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modalTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.closeButton:hover {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+.shareContent {
+  padding: 24px;
+}
+
+.postPreview {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.previewHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.categoryTag {
+  background: #3b82f6;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.earnings {
+  color: #059669;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.earnings::before {
+  content: "$";
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.previewText {
+  font-size: 14px;
+  color: #374151;
+  margin: 8px 0;
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.previewAuthor {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0;
+  font-weight: 500;
+}
+
+.previewAuthor.ownPost {
+  color: #059669;
+  font-weight: 600;
+}
+
+.previewAuthor.otherPost {
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.shareOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.shareOption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+  width: 100%;
+}
+
+.shareOption:hover {
+  border-color: #667eea;
+  background: #f8fafc;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.platformIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f3f4f6;
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.shareOption:nth-child(1) .platformIcon {
+  background: #8b5cf6;
+  color: white;
+}
+
+.shareOption:nth-child(2) .platformIcon {
+  background: #3b82f6;
+  color: white;
+}
+
+.shareOption:nth-child(3) .platformIcon {
+  background: #f3f4f6;
+  color: #000000;
+}
+
+.shareOption:nth-child(4) .platformIcon {
+  background: #6b7280;
+  color: white;
+}
+
+.platformIcon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.platformInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.platformName {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.platformDesc {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .modalOverlay {
+    padding: 16px;
+  }
+  
+  .shareModal {
+    max-height: 90vh;
+  }
+  
+  .modalHeader {
+    padding: 16px 20px 12px;
+  }
+  
+  .shareContent {
+    padding: 20px;
+  }
+  
+  .previewHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .shareOption {
+    padding: 12px;
+  }
+  
+  .platformIcon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .platformIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+}
