@@ -28,7 +28,7 @@ export default function SendUSDCButton({
   onSuccess 
 }: SendUSDCButtonProps) {
   const [showModal, setShowModal] = useState(false);
-  const [amount, setAmount] = useState("1");
+  const [amount, setAmount] = useState("0.10");
 
   const handleSuccess = (status: LifecycleStatus) => {
     if (status.statusName === 'success' && status.statusData?.transactionReceipts?.[0]?.transactionHash) {
@@ -43,14 +43,14 @@ export default function SendUSDCButton({
       // Close modal after a short delay
       setTimeout(() => {
         setShowModal(false);
-        setAmount("1");
+        setAmount("0.10");
       }, 2000);
     }
   };
 
   // Create USDC transfer transaction
   const parsedAmount = parseFloat(amount);
-  const isValidAmount = !isNaN(parsedAmount) && parsedAmount > 0;
+  const isValidAmount = !isNaN(parsedAmount) && parsedAmount >= 0.01;
   
   const calls = isValidAmount ? [
     {
@@ -89,8 +89,8 @@ export default function SendUSDCButton({
                 <input
                   id="amount"
                   type="number"
-                  min="0.1"
-                  step="0.1"
+                  min="0.01"
+                  step="0.01"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
                   className={styles.input}
@@ -98,7 +98,7 @@ export default function SendUSDCButton({
                 />
               </div>
               <p className={styles.hint}>
-                Minimum: $0.10 USDC
+                Minimum: $0.01 USDC
               </p>
             </div>
 
