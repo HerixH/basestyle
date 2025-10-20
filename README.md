@@ -56,7 +56,7 @@ Before getting started, make sure you have:
 - [Vercel](https://vercel.com/) account for hosting (optional)
 - **Wallet with USDC on Base** (for testing payments)
 
-## 🛠️ Installation
+## Installation
 
 ### 1. Clone the repository
 
@@ -364,9 +364,10 @@ basestyle/
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄License
+## License
 
 This project is open source and available under the MIT License.
+My Name is Herix Hangandu and i own and Developed this code /Web 3 Platform
 
 ##  Links
 
