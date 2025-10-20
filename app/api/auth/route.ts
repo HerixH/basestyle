@@ -1,7 +1,18 @@
 import { Errors, createClient } from "@farcaster/quick-auth";
 import { NextRequest, NextResponse } from "next/server";
 
-const client = createClient();
+// Lazily create the client to avoid crashing the function at module load
+// if required environment/config is missing. This yields clearer runtime errors
+// instead of "INTERNAL_FUNCTION_INVOCATION_FAILED".
+function getQuickAuthClient() {
+  try {
+    return createClient();
+  } catch (error) {
+    // Surface a descriptive error which will be handled in the route
+    const message = error instanceof Error ? error.message : "Failed to initialize quick auth client";
+    throw new Error(`QuickAuth client init failed: ${message}`);
+  }
+}
 
 // Helper function to determine the correct domain for JWT verification
 function getUrlHost(request: NextRequest): string {
@@ -47,6 +58,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    const client = getQuickAuthClient();
     // Now we verify the token. `domain` must match the domain of the request.
     // In our case, we're using the `getUrlHost` function to get the domain of the request
     // based on the Vercel environment. This will vary depending on your hosting provider.
