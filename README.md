@@ -2,19 +2,19 @@
 
 **Baselifestyle** is a social mini app built on Base where users can share their daily activities and receive **USDC payments** and NFTs from people who love their content. It's a new way to celebrate productivity, motivation, and community engagement through blockchain rewards.
 
-## ✨ Features
+##  Features
 
-- 📝 **Post Daily Activities** - Share what you accomplished today with text and images
-- 🖼️ **Image Upload** - Add photos to your posts, stored securely in Supabase
-- 💵 **Send USDC** - Reward great content with real USDC on Base blockchain
-- 💎 **Mint NFTs** - Posts with images can be minted as NFTs
-- 🎁 **Send NFTs** - Give NFT badges to creators you appreciate
-- 🔐 **Supabase Authentication** - Secure email/password authentication
-- 🎨 **Beautiful UI** - Modern, responsive design with smooth animations
-- ⚡ **Real-time Updates** - See USDC earnings and NFT counts update instantly
-- 🔗 **OnchainKit Integration** - Built-in wallet connection and transactions
+-  **Post Daily Activities** - Share what you accomplished today with text and images
+-  **Image Upload** - Add photos to your posts, stored securely in Supabase
+-  **Send USDC** - Reward great content with real USDC on Base blockchain
+-  **Mint NFTs** - Posts with images can be minted as NFTs
+-  **Send NFTs** - Give NFT badges to creators you appreciate
+-  **Supabase Authentication** - Secure email/password authentication
+-  **Beautiful UI** - Modern, responsive design with smooth animations
+-  **Real-time Updates** - See USDC earnings and NFT counts update instantly
+-  **OnchainKit Integration** - Built-in wallet connection and transactions
 
-## 🚀 Tech Stack
+##  Tech Stack
 
 - **Next.js 15** - React framework with App Router
 - **TypeScript** - Type-safe development
@@ -25,7 +25,7 @@
 - **Base Blockchain** - Layer 2 for fast, cheap transactions
 - **USDC on Base** - Native stablecoin payments
 
-## 💰 USDC Integration
+##  USDC Integration
 
 This app uses **USDC on Base** for content creator rewards:
 
@@ -46,7 +46,7 @@ This app uses **USDC on Base** for content creator rewards:
 5. Post's earnings update in real-time
 6. Transaction is recorded on-chain
 
-## 📋 Prerequisites
+##  Prerequisites
 
 Before getting started, make sure you have:
 
@@ -132,7 +132,7 @@ To test USDC payments locally:
    - [Base Bridge](https://bridge.base.org/) - Bridge from Ethereum
    - [Uniswap](https://app.uniswap.org/) - Swap for USDC on Base
 
-## 🎨 Customization
+##  Customization
 
 ### Update App Configuration
 
@@ -165,7 +165,7 @@ Replace images in the `/public` folder:
 - `hero.png` - Hero/splash image
 - `screenshot.png` - App screenshot for listings
 
-## 🔧 API Routes
+##  API Routes
 
 ### Posts API (`/api/posts`)
 
@@ -223,7 +223,7 @@ GET /api/usdc-payment?userId=123
 }
 ```
 
-## 🚀 Deployment
+##  Deployment
 
 ### 1. Deploy to Vercel
 
@@ -258,7 +258,7 @@ accountAssociation: {
 
 5. Redeploy: `vercel --prod`
 
-## 📱 Testing
+##  Testing
 
 ### Preview Your App
 
@@ -273,7 +273,7 @@ accountAssociation: {
 
 Create a post in the Base app with your app's URL to publish it.
 
-## 🔐 Production Considerations
+##  Production Considerations
 
 ### Database Integration
 
@@ -331,7 +331,7 @@ if (receipt.status === 'success') {
 4. **Indexing** - Index blockchain events for faster queries
 5. **Webhooks** - Listen for Base blockchain events
 
-## 🏗️ Project Structure
+##  Project Structure
 
 ```
 basestyle/
@@ -360,15 +360,15 @@ basestyle/
 └── README.md
 ```
 
-## 🤝 Contributing
+##  Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
+## 📄License
 
 This project is open source and available under the MIT License.
 
-## 🔗 Links
+##  Links
 
 - [Base Documentation](https://docs.base.org/)
 - [OnchainKit Docs](https://onchainkit.xyz/)
@@ -377,22 +377,22 @@ This project is open source and available under the MIT License.
 - [USDC on Base](https://www.base.org/tokens/usdc)
 - [Base Bridge](https://bridge.base.org/)
 
-## 💡 Ideas for Enhancement
+##  Ideas for Enhancement
 
-- 🏆 **Leaderboard** - Show top earners and most generous supporters
-- 📊 **Analytics Dashboard** - Track earnings, payments, and engagement
-- 🔔 **Notifications** - Alert users when they receive USDC or NFTs
+-  **Leaderboard** - Show top earners and most generous supporters
+- **Analytics Dashboard** - Track earnings, payments, and engagement
+-  **Notifications** - Alert users when they receive USDC or NFTs
 - **Daily Challenges** - Streaks and achievements with USDC rewards
-- 👥 **Follow System** - Follow favorite creators
-- 💬 **Comments** - Discuss posts
-- 🖼️ **Image Uploads** - Add photos to activities
-- 🏅 **Achievement Badges** - Special NFTs for milestones
-- 💰 **Tipping Tiers** - Preset USDC amounts (e.g., $1, $5, $10)
-- 📈 **Creator Stats** - Earnings history and trends
-- 🎁 **Reward Pools** - Community funds for exceptional content
-- 🌟 **Featured Posts** - Highlight top content based on earnings
+-  **Follow System** - Follow favorite creators
+-  **Comments** - Discuss posts
+-  **Image Uploads** - Add photos to activities
+- **Achievement Badges** - Special NFTs for milestones
+-  **Tipping Tiers** - Preset USDC amounts (e.g., $1, $5, $10)
+-  **Creator Stats** - Earnings history and trends
+-  **Reward Pools** - Community funds for exceptional content
+- **Featured Posts** - Highlight top content based on earnings
 
-## 🆘 Support
+##  Support
 
 If you have questions or need help:
 - Open an issue on GitHub
@@ -400,7 +400,7 @@ If you have questions or need help:
 - Check the [Base documentation](https://docs.base.org/)
 - Visit [OnchainKit documentation](https://onchainkit.xyz/)
 
-## 🎓 Learning Resources
+##  Learning Resources
 
 - [Base Getting Started](https://docs.base.org/getting-started)
 - [OnchainKit Transaction Guide](https://onchainkit.xyz/transaction/transaction)
@@ -409,4 +409,4 @@ If you have questions or need help:
 
 ---
 
-Built with ❤️ on Base | Powered by USDC
+Built with  on Base Built By Herix Hanngandu (herix.base.eth)
