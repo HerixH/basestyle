@@ -138,7 +138,7 @@ const NotificationCenter: React.FC = () => {
           </div>
 
           <div className={styles.notificationsList}>
-            {notifications.length === 0 ? (
+            {notifications.filter(n => !n.read).length === 0 ? (
               <div className={styles.emptyState}>
                 <div className={styles.emptyIcon}>
                   <svg viewBox="0 0 24 24" fill="none" style={{ width: '48px', height: '48px' }}>
@@ -164,7 +164,7 @@ const NotificationCenter: React.FC = () => {
                 </p>
               </div>
             ) : (
-              notifications.map((notification) => (
+              notifications.filter(n => !n.read).map((notification) => (
                 <div
                   key={notification.id}
                   className={`${styles.notification} ${getNotificationColor(notification.type)} ${

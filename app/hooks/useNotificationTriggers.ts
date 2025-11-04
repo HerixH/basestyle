@@ -17,9 +17,10 @@ interface Post {
 interface UseNotificationTriggersProps {
   address?: string;
   posts: Post[];
+  isConnected?: boolean;
 }
 
-export const useNotificationTriggers = ({ address, posts }: UseNotificationTriggersProps) => {
+export const useNotificationTriggers = ({ address, posts, isConnected }: UseNotificationTriggersProps) => {
   const { addNotification, clearAllNotifications } = useNotifications();
   const previousPostsRef = useRef<Post[]>([]);
   const previousUsdcRef = useRef<Record<string, number>>({});
@@ -34,13 +35,16 @@ export const useNotificationTriggers = ({ address, posts }: UseNotificationTrigg
     }
   }, [clearAllNotifications]);
 
-  // Monitor for new posts - only show real-time notifications
+  // Monitor for new posts by ID (robust even when initial list is empty)
+  // Only trigger if wallet is connected
   useEffect(() => {
-    if (posts.length > previousPostsRef.current.length && previousPostsRef.current.length > 0) {
-      const newPosts = posts.slice(0, posts.length - previousPostsRef.current.length);
-      
-      newPosts.forEach((post) => {
-        // Only notify for other people's posts, not your own
+    if (!isConnected || !address) return;
+
+    const prevIds = new Set(previousPostsRef.current.map((p) => p.id));
+    const newlyAdded = posts.filter((p) => !prevIds.has(p.id));
+
+    if (newlyAdded.length > 0) {
+      newlyAdded.forEach((post) => {
         if (post.wallet_address !== address) {
           addNotification({
             type: 'activity',
@@ -51,12 +55,15 @@ export const useNotificationTriggers = ({ address, posts }: UseNotificationTrigg
         }
       });
     }
-    
+
     previousPostsRef.current = [...posts];
-  }, [posts, address, addNotification]);
+  }, [posts, address, addNotification, isConnected]);
 
   // Monitor for USDC changes
+  // Only trigger if wallet is connected
   useEffect(() => {
+    if (!isConnected || !address) return;
+
     posts.forEach((post) => {
       const postId = post.id;
       const currentUsdc = post.usdc_earned || 0;
@@ -78,10 +85,13 @@ export const useNotificationTriggers = ({ address, posts }: UseNotificationTrigg
       
       previousUsdcRef.current[postId] = currentUsdc;
     });
-  }, [posts, address, addNotification]);
+  }, [posts, address, addNotification, isConnected]);
 
   // Monitor for NFT changes
+  // Only trigger if wallet is connected
   useEffect(() => {
+    if (!isConnected || !address) return;
+
     posts.forEach((post) => {
       const postId = post.id;
       const currentNft = post.nft_count || 0;
@@ -102,7 +112,7 @@ export const useNotificationTriggers = ({ address, posts }: UseNotificationTrigg
       
       previousNftRef.current[postId] = currentNft;
     });
-  }, [posts, address, addNotification]);
+  }, [posts, address, addNotification, isConnected]);
 
   // No welcome notification - only show real-time alerts
 };

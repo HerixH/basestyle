@@ -62,8 +62,8 @@ export default function Home() {
   // User display name from wallet
   const userName = baseName || (address ? `${address.slice(0, 6)}...${address.slice(-4)}` : 'Anonymous');
 
-  // Initialize notification triggers
-  useNotificationTriggers({ address, posts });
+  // Initialize notification triggers (only when wallet is connected)
+  useNotificationTriggers({ address, posts, isConnected });
 
   // Initialize the miniapp
   useEffect(() => {
