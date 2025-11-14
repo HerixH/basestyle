@@ -6,7 +6,6 @@ import ShareButton from "./ShareButton";
 import { useEffect, useState } from "react";
 import { createClient } from "../lib/supabase";
 import { useName } from "@coinbase/onchainkit/identity";
-import { useNotifications } from "../contexts/NotificationContext";
 
 interface Post {
   id: string;
@@ -60,7 +59,6 @@ export default function PostCard({
   // Check if this is the current user's post
   const isOwnPost = currentWalletAddress && post.wallet_address && post.wallet_address.toLowerCase() === currentWalletAddress.toLowerCase();
   const supabase = createClient();
-  const { addNotification } = useNotifications();
 
   // Likes state
   const [likeCount, setLikeCount] = useState<number>(0);
@@ -92,26 +90,14 @@ export default function PostCard({
   const handleNFTSuccess = async (tokenId: string, txHash: string) => {
     console.log('NFT minted:', { tokenId, txHash });
     onSendNFT(post.id);
-    // Immediate UI notification
-    addNotification({
-      type: 'nft',
-      title: 'NFT Minted!',
-      message: `You minted an NFT for ${postDisplayName}'s activity`,
-      data: { postId: post.id, tokenId, txHash }
-    });
+    // Notification will be triggered by useNotificationTriggers when post data updates
   };
 
   const handleUSDCSuccess = (amount: number, txHash: string) => {
     // Convert dollar amount to cents for storage
     const cents = Math.round(amount * 100);
     onSendUSDC(post.id, cents, txHash);
-    // Immediate UI notification
-    addNotification({
-      type: 'usdc',
-      title: 'USDC Sent',
-      message: `You sent $${amount.toFixed(2)} USDC to ${postDisplayName}`,
-      data: { postId: post.id, amount: cents, txHash }
-    });
+    // Notification will be triggered by useNotificationTriggers when post data updates
   };
 
   // Use the post owner's wallet address (may be null for old posts)

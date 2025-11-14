@@ -26,6 +26,7 @@ export const useNotificationTriggers = ({ address, posts, isConnected }: UseNoti
   const previousUsdcRef = useRef<Record<string, number>>({});
   const previousNftRef = useRef<Record<string, number>>({});
   const hasInitialized = useRef(false);
+  const sentNotificationsRef = useRef<Set<string>>(new Set());
 
   // Clear any test notifications on first load
   useEffect(() => {
@@ -73,14 +74,27 @@ export const useNotificationTriggers = ({ address, posts, isConnected }: UseNoti
         const amount = currentUsdc - previousUsdc;
         const isOwnPost = post.wallet_address === address;
         
-        addNotification({
-          type: 'usdc',
-          title: isOwnPost ? 'USDC Received!' : 'USDC Sent',
-          message: isOwnPost 
-            ? `You received $${(amount / 100).toFixed(2)} USDC for your activity!`
-            : `You sent $${(amount / 100).toFixed(2)} USDC to ${post.user_name}`,
-          data: { postId, amount, recipient: post.user_name }
-        });
+        // Create unique key to prevent duplicate notifications
+        const notificationKey = `usdc-${postId}-${currentUsdc}`;
+        
+        // Only send if we haven't sent this notification already
+        if (!sentNotificationsRef.current.has(notificationKey)) {
+          sentNotificationsRef.current.add(notificationKey);
+          
+          addNotification({
+            type: 'usdc',
+            title: isOwnPost ? 'USDC Received!' : 'USDC Sent',
+            message: isOwnPost 
+              ? `You received $${(amount / 100).toFixed(2)} USDC for your activity!`
+              : `You sent $${(amount / 100).toFixed(2)} USDC to ${post.user_name}`,
+            data: { postId, amount, recipient: post.user_name }
+          });
+          
+          // Clean up old notification keys after 5 minutes to prevent memory leak
+          setTimeout(() => {
+            sentNotificationsRef.current.delete(notificationKey);
+          }, 5 * 60 * 1000);
+        }
       }
       
       previousUsdcRef.current[postId] = currentUsdc;
@@ -100,14 +114,27 @@ export const useNotificationTriggers = ({ address, posts, isConnected }: UseNoti
       if (currentNft > previousNft && previousNftRef.current[postId] !== undefined) {
         const isOwnPost = post.wallet_address === address;
         
-        addNotification({
-          type: 'nft',
-          title: isOwnPost ? 'NFT Minted!' : 'NFT Sent',
-          message: isOwnPost 
-            ? `Someone minted an NFT for your activity!`
-            : `You minted an NFT for ${post.user_name}'s activity`,
-          data: { postId, recipient: post.user_name }
-        });
+        // Create unique key to prevent duplicate notifications
+        const notificationKey = `nft-${postId}-${currentNft}`;
+        
+        // Only send if we haven't sent this notification already
+        if (!sentNotificationsRef.current.has(notificationKey)) {
+          sentNotificationsRef.current.add(notificationKey);
+          
+          addNotification({
+            type: 'nft',
+            title: isOwnPost ? 'NFT Minted!' : 'NFT Sent',
+            message: isOwnPost 
+              ? `Someone minted an NFT for your activity!`
+              : `You minted an NFT for ${post.user_name}'s activity`,
+            data: { postId, recipient: post.user_name }
+          });
+          
+          // Clean up old notification keys after 5 minutes to prevent memory leak
+          setTimeout(() => {
+            sentNotificationsRef.current.delete(notificationKey);
+          }, 5 * 60 * 1000);
+        }
       }
       
       previousNftRef.current[postId] = currentNft;
